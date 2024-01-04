@@ -32,8 +32,9 @@ const router = createBrowserRouter([
         element: <Profile></Profile>
       },
       {
-        path: 'recipe',
-        element: <Recipe></Recipe>
+        path: 'chef/:id',
+        element: <Recipe></Recipe>,
+        loader: ({params}) => fetch(`https://react-chef-recipe-server.vercel.app/chef/${params.id}`)
       }
     ]
   }
