@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const RecipeCard = ({ recipe, buttonStatus }) => {
     const { recipePhoto, recipeName, chefId, ingredients, instructions } = recipe;
-    const [favoriteBtn, setFavoriteBtn] = useState(false)
+    const [favoriteBtn, setFavoriteBtn] = useState(false);
 
     const handleFavorite = () => {
         setFavoriteBtn(true);

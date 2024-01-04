@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { AuthContext } from '../../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const [error, setError] = useState('');
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
+    const { createUser } = useContext(AuthContext)
+
     const handleRegister = event => {
         event.preventDefault();
+
+        const loader = toast.loading('Creating User');
+        () => loader;
 
         const form = event.target;
         const name = form.name.value;
@@ -17,7 +24,17 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, photo, email, password);
+        createUser(email, password)
+        .then(result => {
+            const createdUser = result.user;
+            toast.dismiss(loader);
+            toast.success('User Create Successful')
+        })
+        .catch(error => {
+            console.error(error)
+            toast.dismiss(loader);
+            toast.error('Something Wrong Registration Failed')
+        })
     }
     return (
         <div className="container mx-auto px-8">

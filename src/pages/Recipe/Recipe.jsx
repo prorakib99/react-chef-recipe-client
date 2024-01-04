@@ -28,8 +28,6 @@ const Recipe = () => {
             </div>
         )
     }
-
-    console.log(recipes);
     
     return (
         <div className='container mx-auto px-8'>

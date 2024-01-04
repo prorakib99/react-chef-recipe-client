@@ -1,11 +1,21 @@
 import React, { createContext } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Toaster } from 'react-hot-toast';
+import app from '../firebase/firebase.config';
 
-const AuthContext = createContext(null)
+export const AuthContext = createContext(null);
+
+const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
 
-    const authInfo = {}
+    const createUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password);
+    }
+
+    const authInfo = {
+        createUser
+    }
     return (
         <AuthContext.Provider value={authInfo}>
             <Toaster />
