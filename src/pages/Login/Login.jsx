@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-    
+    const [error, setError] = useState('');
+
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target;
@@ -44,7 +45,8 @@ const Login = () => {
                             />
                         </div>
 
-                    
+                        {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
                         <button
                             type="submit"
                             className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none font-bold focus:shadow-outline-blue"

@@ -9,7 +9,7 @@ const Header = () => {
         <div className='container mx-auto px-8'>
             <div className="navbar bg-base-100 relative shadow-2xl flex justify-between rounded-2xl mt-8">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">Food Collection</a>
+                    <Link to='/' className="btn btn-ghost text-xl">Food Collection</Link>
                 </div>
 
 
