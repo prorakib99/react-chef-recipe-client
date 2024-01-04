@@ -11,6 +11,7 @@ import Profile from './pages/Profile/Profile.jsx'
 import Recipe from './pages/Recipe/Recipe.jsx'
 import NotFound from './pages/NotFound/NotFound.jsx'
 import AuthProvider from './provider/AuthProvider.jsx'
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'chef/:id',
-        element: <Recipe></Recipe>,
+        element: <PrivateRoute><Recipe></Recipe></PrivateRoute>,
         loader: ({ params }) => fetch(`https://react-chef-recipe-server.vercel.app/chef/${params.id}`)
       }
     ]

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from '../../provider/AuthProvider';
@@ -10,7 +10,11 @@ const Login = () => {
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
-    const { loginUser } = useContext(AuthContext)
+    const { user, loginUser } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -26,7 +30,8 @@ const Login = () => {
         .then(result => {
             const loggedUser = result.user;
             toast.dismiss(loader);
-            toast.success('User Login Successful')
+            toast.success('User Login Successful');
+            navigate(from, {replace: true})
         })
         .catch(error => {
             console.error(error)
@@ -35,7 +40,6 @@ const Login = () => {
         })
     }
 
-    console.log(googleButton);
     return (
         <div className="container mx-auto px-8">
             <div className="min-h-[85vh] flex flex-col items-center justify-center">

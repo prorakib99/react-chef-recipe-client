@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CarouselItem from './components/CarouselItem';
 import RecipeCard from '../Shared/RecipeCard/RecipeCard';
+import { AuthContext } from '../../provider/AuthProvider';
 
 
 const Home = () => {
@@ -65,9 +66,9 @@ const Home = () => {
             <div className='my-16 pt-10'>
                 <h4 className='text-4xl font-bold mb-10'>All Recipes</h4>
                 <div className='grid lg:grid-cols-3 gap-16'>
-                   {
-                    recipes.map(recipe => <RecipeCard key={recipe.recipeId} buttonStatus={buttonStatus} recipe={recipe}></RecipeCard>)
-                   }
+                    {
+                        recipes.map(recipe => <RecipeCard key={recipe.recipeId} buttonStatus={buttonStatus} recipe={recipe}></RecipeCard>)
+                    }
                 </div>
             </div>
         </div>

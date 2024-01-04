@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { Toaster } from 'react-hot-toast';
 import app from '../firebase/firebase.config';
 
@@ -8,7 +8,8 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
+    const [loader, setLoader] = useState(true)
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -21,23 +22,30 @@ const AuthProvider = ({ children }) => {
             displayName: name, photoURL: photoURL
           })
     }
+    const logOut = () => {
+        return signOut(auth)
+    }
 
     const authInfo = {
         user,
+        loader,
         createUser,
         updateProfileInfo,
-        loginUser
+        loginUser,
+        logOut
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+            setLoader(false);
         });
 
         return () => {
             unsubscribe();
         }
     }, [])
+
 
 
     return (

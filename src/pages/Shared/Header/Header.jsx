@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TfiAlignCenter, TfiClose } from "react-icons/tfi";
+import { AuthContext } from '../../../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Header = () => {
     const [navStatus, setNavStatus] = useState(false);
 
-    // const handleMenu = event => {
-    //     setNavStatus(event.target.checked)
-    // }
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+        .then(() => {
+            toast.success('Sign Out Successful')
+        })
+        .catch(error => {
+            toast.error(error.message)
+        })
+    }
 
     return (
         <div className='container mx-auto px-8'>
@@ -16,12 +26,11 @@ const Header = () => {
                     <Link to='/' className="btn btn-ghost text-xl">Food Collection</Link>
                 </div>
 
-
                 <div className="flex-none gap-4">
                     <Link onClick={() => setNavStatus(!navStatus)} className="btn lg:hidden btn-circle swap swap-rotate mr-2">
-                        
+
                         {
-                            navStatus ? <TfiClose className='text-2xl' />  : <TfiAlignCenter className='text-2xl' />
+                            navStatus ? <TfiClose className='text-2xl' /> : <TfiAlignCenter className='text-2xl' />
                         }
 
                     </Link>
@@ -29,9 +38,12 @@ const Header = () => {
                         <ul onClick={() => setNavStatus(false)} className="menu menu-vertical lg:menu-horizontal z-10 rounded-box">
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Home</Link></li>
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Blog</Link></li>
-                            <li><Link to='/login' className='text-lg font-bold py-1 mx-3'>Login</Link></li>
+                            {
+                                !user && <li><Link to='/login' className='text-lg font-bold py-1 mx-3'>Login</Link></li>
+                            }
                         </ul>
-                        <div className="dropdown z-10 dropdown-end">
+                        {
+                            user && <div className="dropdown z-10 dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -44,9 +56,10 @@ const Header = () => {
                                         <span className="badge">New</span>
                                     </Link>
                                 </li>
-                                <li><Link className='text-lg'>Logout</Link></li>
+                                <li><Link onClick={handleSignOut} className='text-lg'>Logout</Link></li>
                             </ul>
                         </div>
+                        }
                     </div>
                 </div>
             </div>

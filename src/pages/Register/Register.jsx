@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from '../../provider/AuthProvider';
@@ -10,7 +10,11 @@ const Register = () => {
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
-    const { createUser, updateProfileInfo } = useContext(AuthContext)
+    const { user, createUser, updateProfileInfo } = useContext(AuthContext);
+
+    if(user){
+       return <Navigate to='/' replace={true}></Navigate>
+    }
 
     const handleRegister = event => {
         event.preventDefault();
@@ -25,20 +29,22 @@ const Register = () => {
         const password = form.password.value;
 
         createUser(email, password)
-        .then(result => {
-            const createdUser = result.user;
-            toast.dismiss(loader);
-            toast.success('User Create Successful');
+            .then(result => {
+                const createdUser = result.user;
+                toast.dismiss(loader);
+                toast.success('User Create Successful');
 
-            updateProfileInfo(createdUser, name, photo)
-            .then()
-            .catch(error => console.error(error))
-        })
-        .catch(error => {
-            console.error(error)
-            toast.dismiss(loader);
-            toast.error(error.message)
-        })
+                updateProfileInfo(createdUser, name, photo)
+                .then()
+                .catch(error => console.error(error));
+
+                <Navigate to='/' replace={true}></Navigate>
+            })
+            .catch(error => {
+                console.error(error)
+                toast.dismiss(loader);
+                toast.error(error.message)
+            })
     }
     return (
         <div className="container mx-auto px-8">
