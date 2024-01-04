@@ -10,7 +10,7 @@ const Register = () => {
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateProfileInfo } = useContext(AuthContext)
 
     const handleRegister = event => {
         event.preventDefault();
@@ -28,12 +28,16 @@ const Register = () => {
         .then(result => {
             const createdUser = result.user;
             toast.dismiss(loader);
-            toast.success('User Create Successful')
+            toast.success('User Create Successful');
+
+            updateProfileInfo(createdUser, name, photo)
+            .then()
+            .catch(error => console.error(error))
         })
         .catch(error => {
             console.error(error)
             toast.dismiss(loader);
-            toast.error('Something Wrong Registration Failed')
+            toast.error(error.message)
         })
     }
     return (

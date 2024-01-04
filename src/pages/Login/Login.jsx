@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { AuthContext } from '../../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const [error, setError] = useState('');
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
+    const { loginUser } = useContext(AuthContext)
+
     const handleLogin = event => {
-        event.preventDefault()
+        event.preventDefault();
+
+        const loader = toast.loading('Waiting for Login');
+        () => loader;
+
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(email, password);
+        loginUser(email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            toast.dismiss(loader);
+            toast.success('User Login Successful')
+        })
+        .catch(error => {
+            console.error(error)
+            toast.dismiss(loader);
+            toast.error('Something Wrong Login Failed')
+        })
     }
 
     console.log(googleButton);
