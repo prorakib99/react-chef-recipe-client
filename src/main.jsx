@@ -9,11 +9,13 @@ import Login from './pages/Login/Login.jsx'
 import Register from './pages/Register/Register.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Recipe from './pages/Recipe/Recipe.jsx'
+import NotFound from './pages/NotFound/NotFound.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',
