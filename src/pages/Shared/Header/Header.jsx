@@ -25,7 +25,7 @@ const Header = () => {
                         <ul onClick={() => setNavStatus(false)} className="menu menu-vertical lg:menu-horizontal rounded-box">
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Home</Link></li>
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Blog</Link></li>
-                            <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Login</Link></li>
+                            <li><Link to='/login' className='text-lg font-bold py-1 mx-3'>Login</Link></li>
                         </ul>
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
