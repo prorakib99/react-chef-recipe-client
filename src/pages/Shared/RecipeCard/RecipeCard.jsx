@@ -2,13 +2,12 @@ import React from 'react';
 import { FaStarOfLife } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, buttonStatus }) => {
     const { recipePhoto, recipeName, chefId, ingredients, instructions } = recipe;
-    console.log(recipe);
     return (
         <>
             <div className="card bg-base-100 shadow-xl">
-                <figure><img className='lg:h-72 w-full' src={recipePhoto} alt="Shoes" /></figure>
+                <figure><img className='lg:h-72 w-full' src={recipePhoto} alt={recipeName} /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-2xl mb-3">{recipeName}</h2>
                     <ul className='flex gap-2 flex-wrap'>
@@ -23,9 +22,14 @@ const RecipeCard = ({ recipe }) => {
                         }
                     </ul>
                     <div className="card-actions justify-end mt-6">
-                        <Link to={`/chef/${chefId}`} className='w-full'>
-                            <p className="btn btn-primary text-base w-full text-white font-bold">Details View</p>
-                        </Link>
+                        {
+                            buttonStatus ? <Link className='w-full'>
+                                <p className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Mark Favorite</p>
+                            </Link> :
+                                <Link to={`/chef/${chefId}`} className='w-full'>
+                                    <p className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Details View</p>
+                                </Link>
+                        }
                     </div>
                 </div>
             </div>

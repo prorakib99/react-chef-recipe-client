@@ -3,13 +3,15 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CarouselItem from './components/CarouselItem';
-import RecipeCard from './components/RecipeCard';
+import RecipeCard from '../Shared/RecipeCard/RecipeCard';
 
 
 const Home = () => {
     const [chefs, setChefs] = useState([]);
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const buttonStatus = false;
 
     useEffect(() => {
         fetch('https://react-chef-recipe-server.vercel.app/chef')
@@ -64,7 +66,7 @@ const Home = () => {
                 <h4 className='text-4xl font-bold mb-10'>All Recipes</h4>
                 <div className='grid lg:grid-cols-3 gap-16'>
                    {
-                    recipes.map(recipe => <RecipeCard key={recipe.recipeId} recipe={recipe}></RecipeCard>)
+                    recipes.map(recipe => <RecipeCard key={recipe.recipeId} buttonStatus={buttonStatus} recipe={recipe}></RecipeCard>)
                    }
                 </div>
             </div>
