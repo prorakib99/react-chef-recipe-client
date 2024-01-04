@@ -11,7 +11,7 @@ const Header = () => {
 
     return (
         <div className='container mx-auto px-8'>
-            <div className="navbar bg-base-100 relative shadow-2xl flex justify-between rounded-2xl mt-8">
+            <div className="navbar bg-base-100 relative shadow-2xl flex justify-between rounded-2xl my-8">
                 <div className="flex-1">
                     <Link to='/' className="btn btn-ghost text-xl">Food Collection</Link>
                 </div>
@@ -25,7 +25,7 @@ const Header = () => {
                         }
 
                     </Link>
-                    <div className={`absolute lg:flex duration-500 right-0 lg:static ${navStatus ? 'top-20 shadow-2xl rounded-xl pb-3 pt-6 bg-white text-center' : 'top-[-300px]'}`}>
+                    <div className={`absolute lg:flex duration-500 z-10 right-0 lg:static ${navStatus ? 'top-20 shadow-2xl rounded-xl pb-3 pt-6 bg-white text-center' : 'top-[-300px]'}`}>
                         <ul onClick={() => setNavStatus(false)} className="menu menu-vertical lg:menu-horizontal z-10 rounded-box">
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Home</Link></li>
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Blog</Link></li>

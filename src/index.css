@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.slick-arrow.slick-next {
+    display: none !important;
+}
