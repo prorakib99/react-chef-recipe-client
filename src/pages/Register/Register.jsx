@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 const Register = () => {
     const [error, setError] = useState('');
+    const [googleButton, setGoogleButton] = useState(false);
+    const [githubButton, setGithubButton] = useState(false);
 
     const handleRegister = event => {
         event.preventDefault();
@@ -17,8 +21,8 @@ const Register = () => {
     }
     return (
         <div className="container mx-auto px-8">
-            <div className="h-[85vh] flex items-center justify-center">
-                <div className="bg-white p-8 rounded-2xl shadow-2xl w-96">
+            <div className="min-h-[85vh] py-10 flex flex-col items-center justify-center">
+                <div className="bg-white p-8 mb-4 rounded-2xl shadow-2xl w-96">
                     <h2 className="text-2xl font-semibold mb-6">Register</h2>
 
                     <form onSubmit={handleRegister}>
@@ -90,6 +94,20 @@ const Register = () => {
                             <Link to='/login' className="text-blue-500 font-bold hover:underline">Login here</Link>
                         </p>
                     </div>
+                </div>
+
+                <div className="divider">OR</div>
+
+                <div className='w-96 mt-2'>
+                    <Link>
+                        <button onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
+                            <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
+                        </button>
+                    </Link>
+                    <Link>
+                        <button onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
