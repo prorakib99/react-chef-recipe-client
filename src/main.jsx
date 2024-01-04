@@ -10,6 +10,7 @@ import Register from './pages/Register/Register.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Recipe from './pages/Recipe/Recipe.jsx'
 import NotFound from './pages/NotFound/NotFound.jsx'
+import AuthProvider from './provider/AuthProvider.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: 'chef/:id',
         element: <Recipe></Recipe>,
-        loader: ({params}) => fetch(`https://react-chef-recipe-server.vercel.app/chef/${params.id}`)
+        loader: ({ params }) => fetch(`https://react-chef-recipe-server.vercel.app/chef/${params.id}`)
       }
     ]
   }
@@ -44,6 +45,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

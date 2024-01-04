@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaStarOfLife } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const RecipeCard = ({ recipe, buttonStatus }) => {
     const { recipePhoto, recipeName, chefId, ingredients, instructions } = recipe;
+    const [favoriteBtn, setFavoriteBtn] = useState(false)
+
+    const handleFavorite = () => {
+        setFavoriteBtn(true);
+        toast.success('Successfully Added!')
+    }
     return (
         <>
             <div className="card bg-base-100 shadow-xl">
@@ -24,10 +31,10 @@ const RecipeCard = ({ recipe, buttonStatus }) => {
                     <div className="card-actions justify-end mt-6">
                         {
                             buttonStatus ? <Link className='w-full'>
-                                <p className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Mark Favorite</p>
+                                <button onClick={handleFavorite} disabled={favoriteBtn} className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Mark Favorite</button>
                             </Link> :
                                 <Link to={`/chef/${chefId}`} className='w-full'>
-                                    <p className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Details View</p>
+                                    <button className="btn bg-blue-500 hover:bg-blue-600 text-base w-full text-white font-bold">Details View</button>
                                 </Link>
                         }
                     </div>
