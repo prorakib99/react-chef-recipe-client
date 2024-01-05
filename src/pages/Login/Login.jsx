@@ -10,7 +10,7 @@ const Login = () => {
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
-    const { user, loginUser, handleGoogleLogin } = useContext(AuthContext);
+    const { user, loginUser, handleGoogleLogin, handleGithubLogin } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -38,6 +38,10 @@ const Login = () => {
             toast.dismiss(loader);
             toast.error('Something Wrong Login Failed')
         })
+    }
+
+    if(user){
+        return navigate('/', {replace: true});
     }
 
     return (
@@ -97,7 +101,7 @@ const Login = () => {
                             <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
                         </button>
                     </Link>
-                    <Link>
+                    <Link onClick={handleGithubLogin}>
                         <button onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
                         </button>
                     </Link>

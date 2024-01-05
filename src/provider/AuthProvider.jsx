@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
 import app from '../firebase/firebase.config';
 
@@ -11,7 +11,8 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loader, setLoader] = useState(true);
 
-    const googleProvider = new GoogleAuthProvider()
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -26,6 +27,9 @@ const AuthProvider = ({ children }) => {
     }
     const signInWithGoogle = () => {
         return signInWithPopup(auth, googleProvider);
+    }
+    const signInWithGithub = () => {
+        return signInWithPopup(auth, githubProvider);
     }
     const logOut = () => {
         return signOut(auth)
@@ -43,6 +47,18 @@ const AuthProvider = ({ children }) => {
            );
     }
 
+    const handleGithubLogin = () => {
+        const loginStatus = signInWithGithub();
+        toast.promise(
+            loginStatus,
+             {
+               loading: 'Pending...',
+               success: <b>Sign In Success</b>,
+               error: <b>Something Wrong try Again</b>,
+             }
+           );
+    }
+
     const authInfo = {
         user,
         loader,
@@ -50,6 +66,7 @@ const AuthProvider = ({ children }) => {
         updateProfileInfo,
         loginUser,
         handleGoogleLogin,
+        handleGithubLogin,
         logOut
     }
 
