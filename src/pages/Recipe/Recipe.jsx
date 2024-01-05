@@ -33,7 +33,7 @@ const Recipe = () => {
         <div className='container mx-auto px-8'>
             <div className="hero my-10 pt-10">
                 <div className="hero-content gap-14 items-center flex-col lg:flex-row">
-                    <img src={picture} className="max-w-sm rounded-full p-6 shadow-2xl" />
+                    <img src={picture} className="max-w-sm w-full rounded-full p-6 shadow-2xl" />
                     <div>
                         <h1 className="text-5xl text-center font-bold mb-8">{chefName}</h1>
                         <div className="stats flex shadow flex-wrap">
