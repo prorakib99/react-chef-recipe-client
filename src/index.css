@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.slick-arrow.slick-next {
-    display: none !important;
+.slick-arrow.slick-next, .slick-arrow.slick-prev, .slick-arrow.slick-next:hover, .slick-arrow.slick-prev:focus, .slick-arrow.slick-prev:hover, .slick-arrow.slick-prev:focus {
+    background-color: green;
+    border-radius: 50%;
 }
+ 
