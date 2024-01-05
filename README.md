@@ -1,8 +1,17 @@
-# React + Vite
+# React Chef and Recipe Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/prorakib99/react-chef-recipe-client.svg)](https://github.com/prorakib99/react-chef-recipe-client/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/prorakib99/react-chef-recipe-client.svg)](https://github.com/prorakib99/react-chef-recipe-client/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/prorakib99/react-chef-recipe-client.svg)](https://github.com/prorakib99/react-chef-recipe-client/network)
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Welcome to the React Vite Chef Recipe Details project! This React Vite project focuses on providing detailed information about chef recipes. Utilizing technologies like Daisy UI, Tailwind CSS, React Hot Toast, and more, it creates an interactive and visually appealing platform for exploring culinary delights.
+
+## Table of Contents
+
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
