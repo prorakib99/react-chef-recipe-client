@@ -43,7 +43,7 @@ const Login = () => {
     return (
         <div className="container mx-auto px-8">
             <div className="min-h-[85vh] flex flex-col items-center justify-center">
-                <div className="bg-white p-8 mb-4 rounded-2xl shadow-2xl w-96">
+                <div className="bg-white p-8 mb-4 rounded-2xl shadow-2xl lg:w-96">
                     <h2 className="text-2xl font-semibold mb-6">Login</h2>
                     <form onSubmit={handleLogin}>
                         <div className="mb-4">
@@ -91,7 +91,7 @@ const Login = () => {
                 </div>
                 <div className="divider">OR</div>
 
-                <div className='w-96 mt-2'>
+                <div className='lg:w-96 mt-2'>
                     <Link onClick={handleGoogleLogin}>
                         <button onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
                             <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
