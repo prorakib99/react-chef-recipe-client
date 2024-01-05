@@ -10,7 +10,7 @@ const Login = () => {
     const [googleButton, setGoogleButton] = useState(false);
     const [githubButton, setGithubButton] = useState(false);
 
-    const { user, loginUser } = useContext(AuthContext);
+    const { user, loginUser, handleGoogleLogin } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -92,7 +92,7 @@ const Login = () => {
                 <div className="divider">OR</div>
 
                 <div className='w-96 mt-2'>
-                    <Link>
+                    <Link onClick={handleGoogleLogin}>
                         <button onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
                             <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
                         </button>

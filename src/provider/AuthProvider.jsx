@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
-import { Toaster } from 'react-hot-toast';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import toast, { Toaster } from 'react-hot-toast';
 import app from '../firebase/firebase.config';
 
 export const AuthContext = createContext(null);
@@ -9,7 +9,9 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loader, setLoader] = useState(true)
+    const [loader, setLoader] = useState(true);
+
+    const googleProvider = new GoogleAuthProvider()
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -22,8 +24,23 @@ const AuthProvider = ({ children }) => {
             displayName: name, photoURL: photoURL
           })
     }
+    const signInWithGoogle = () => {
+        return signInWithPopup(auth, googleProvider);
+    }
     const logOut = () => {
         return signOut(auth)
+    }
+
+    const handleGoogleLogin = () => {
+        const loginStatus = signInWithGoogle();
+        toast.promise(
+            loginStatus,
+             {
+               loading: 'Pending...',
+               success: <b>Sign In Success</b>,
+               error: <b>Something Wrong try Again</b>,
+             }
+           );
     }
 
     const authInfo = {
@@ -32,6 +49,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         updateProfileInfo,
         loginUser,
+        handleGoogleLogin,
         logOut
     }
 
