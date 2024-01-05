@@ -10,7 +10,7 @@ const Main = () => {
     if (loader) {
         return (
             <div className='w-screen text-center'>
-                <span className="loading my-11 loading-bars loading-lg"></span>
+                <span className="loading my-40 loading-bars loading-lg"></span>
             </div>
         )
     }

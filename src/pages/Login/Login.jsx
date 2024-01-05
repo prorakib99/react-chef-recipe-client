@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -12,7 +12,7 @@ const Login = () => {
 
     const { user, loginUser, handleGoogleLogin, handleGithubLogin } = useContext(AuthContext);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
@@ -36,14 +36,10 @@ const Login = () => {
         .catch(error => {
             console.error(error)
             toast.dismiss(loader);
-            toast.error('Something Wrong Login Failed')
+            toast.error(error.message)
         })
     }
-
-    if(user){
-        return navigate('/', {replace: true});
-    }
-
+    
     return (
         <div className="container mx-auto px-8">
             <div className="min-h-[85vh] flex flex-col items-center justify-center">

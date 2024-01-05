@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
 import app from '../firebase/firebase.config';
+import { Navigate } from 'react-router-dom';
 
 export const AuthContext = createContext(null);
 
@@ -26,13 +27,16 @@ const AuthProvider = ({ children }) => {
           })
     }
     const signInWithGoogle = () => {
+        setLoader(true)
         return signInWithPopup(auth, googleProvider);
     }
     const signInWithGithub = () => {
+        setLoader(true)
         return signInWithPopup(auth, githubProvider);
     }
     const logOut = () => {
-        return signOut(auth)
+        setLoader(true)
+        return signOut(auth);
     }
 
     const handleGoogleLogin = () => {
