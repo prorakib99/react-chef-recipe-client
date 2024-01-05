@@ -10,8 +10,6 @@ const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
-    console.log(user);
-
     const handleSignOut = () => {
         logOut()
             .then(() => {
@@ -30,13 +28,13 @@ const Header = () => {
                 </div>
 
                 <div className="flex-none gap-4">
-                    <Link onClick={() => setNavStatus(!navStatus)} className="btn lg:hidden btn-circle swap swap-rotate mr-2">
+                    <button onClick={() => setNavStatus(!navStatus)} className="btn lg:hidden btn-circle swap swap-rotate mr-2">
 
                         {
                             navStatus ? <TfiClose className='text-2xl' /> : <TfiAlignCenter className='text-2xl' />
                         }
 
-                    </Link>
+                    </button>
                     <div className={`absolute lg:flex duration-500 z-10 right-0 lg:static ${navStatus ? 'top-20 shadow-2xl rounded-xl pb-3 pt-6 bg-white text-center' : 'top-[-300px]'}`}>
                         <ul onClick={() => setNavStatus(false)} className="menu menu-vertical lg:menu-horizontal z-10 rounded-box">
                             <li><Link to='/' className='text-lg font-bold py-1 mx-3'>Home</Link></li>

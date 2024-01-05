@@ -12,7 +12,7 @@ const Register = () => {
 
     const { user, createUser, updateProfileInfo, handleGoogleLogin, handleGithubLogin } = useContext(AuthContext);
 
-    if(user){
+    if (user) {
         return <Navigate to='/' replace={true}></Navigate>
     }
 
@@ -35,8 +35,8 @@ const Register = () => {
                 toast.success('User Create Successful');
 
                 updateProfileInfo(createdUser, name, photo)
-                .then()
-                .catch(error => console.error(error));
+                    .then()
+                    .catch(error => console.error(error));
 
                 <Navigate to='/' replace={true}></Navigate>
             })
@@ -127,15 +127,12 @@ const Register = () => {
                 <div className="divider">OR</div>
 
                 <div className='lg:w-96 mt-2'>
-                    <Link onClick={handleGoogleLogin}>
-                        <button onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
-                            <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
-                        </button>
-                    </Link>
-                    <Link onClick={handleGithubLogin}>
-                        <button onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
-                        </button>
-                    </Link>
+                    <button onClick={handleGoogleLogin} onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
+                        <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
+                    </button>
+
+                    <button onClick={handleGithubLogin} onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
+                    </button>
                 </div>
             </div>
         </div>

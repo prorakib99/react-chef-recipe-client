@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -12,6 +12,9 @@ const Login = () => {
 
     const { user, loginUser, handleGoogleLogin, handleGithubLogin } = useContext(AuthContext);
 
+    if (user) {
+        return <Navigate to='/' replace={true}></Navigate>
+    }
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -27,19 +30,19 @@ const Login = () => {
         const password = form.password.value;
 
         loginUser(email, password)
-        .then(result => {
-            const loggedUser = result.user;
-            toast.dismiss(loader);
-            toast.success('User Login Successful');
-            navigate(from, {replace: true})
-        })
-        .catch(error => {
-            console.error(error)
-            toast.dismiss(loader);
-            toast.error(error.message)
-        })
+            .then(result => {
+                const loggedUser = result.user;
+                toast.dismiss(loader);
+                toast.success('User Login Successful');
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+                toast.dismiss(loader);
+                toast.error(error.message)
+            })
     }
-    
+
     return (
         <div className="container mx-auto px-8">
             <div className="min-h-[85vh] flex flex-col items-center justify-center">
@@ -92,15 +95,12 @@ const Login = () => {
                 <div className="divider">OR</div>
 
                 <div className='lg:w-96 mt-2'>
-                    <Link onClick={handleGoogleLogin}>
-                        <button onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
-                            <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
-                        </button>
-                    </Link>
-                    <Link onClick={handleGithubLogin}>
-                        <button onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
-                        </button>
-                    </Link>
+                    <button onClick={handleGoogleLogin} onMouseLeave={() => setGoogleButton(false)} onMouseEnter={() => setGoogleButton(true)} className="py-2 w-full mb-4 relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300">
+                        <FcGoogle className={`absolute duration-700 text-3xl top-1 ${googleButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Google</span>
+                    </button>
+
+                    <button onClick={handleGithubLogin} onMouseLeave={() => setGithubButton(false)} onMouseEnter={() => setGithubButton(true)} className="py-2 w-full relative bg-white hover:shadow-2xl rounded-[57px] border border-stone-300"><FaGithub className={`absolute duration-700 text-3xl top-1 ${githubButton ? 'left-[345px]' : 'left-2'}`} /> <span className='text-black font-medium text-base text-center'>Continue with Github</span>
+                    </button>
                 </div>
             </div>
         </div>

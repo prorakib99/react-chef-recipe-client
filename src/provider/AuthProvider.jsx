@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
 import app from '../firebase/firebase.config';
-import { Navigate } from 'react-router-dom';
 
 export const AuthContext = createContext(null);
 
@@ -40,27 +39,37 @@ const AuthProvider = ({ children }) => {
     }
 
     const handleGoogleLogin = () => {
-        const loginStatus = signInWithGoogle();
-        toast.promise(
-            loginStatus,
-             {
-               loading: 'Pending...',
-               success: <b>Sign In Success</b>,
-               error: <b>Something Wrong try Again</b>,
-             }
-           );
+        const loader = toast.loading('Waiting for Login');
+        () => loader;
+
+        signInWithGoogle()
+        .then(result => {
+            const loggedUser = result.user;
+            toast.dismiss(loader);
+            toast.success('User Login Successful');
+        })
+        .catch(error => {
+            console.error(error)
+            toast.dismiss(loader);
+            toast.error(error.message)
+        })
     }
 
     const handleGithubLogin = () => {
-        const loginStatus = signInWithGithub();
-        toast.promise(
-            loginStatus,
-             {
-               loading: 'Pending...',
-               success: <b>Sign In Success</b>,
-               error: <b>Something Wrong try Again</b>,
-             }
-           );
+        const loader = toast.loading('Waiting for Login');
+        () => loader;
+
+        signInWithGithub()
+        .then(result => {
+            const loggedUser = result.user;
+            toast.dismiss(loader);
+            toast.success('User Login Successful');
+        })
+        .catch(error => {
+            console.error(error)
+            toast.dismiss(loader);
+            toast.error(error.message)
+        })
     }
 
     const authInfo = {
